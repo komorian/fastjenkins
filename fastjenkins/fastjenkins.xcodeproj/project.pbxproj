@@ -194,7 +194,7 @@
 					D388DF7B1E816F95006CD2C4 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 9XD9GWR3VJ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					D388DF8F1E816F95006CD2C4 = {
 						CreatedOnToolsVersion = 8.2;
@@ -420,6 +420,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.komorian.fastjenkins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c58c02b4-fcaa-406e-afab-3c830c698c82";
+				PROVISIONING_PROFILE_SPECIFIER = "XC Wild Dev1";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -428,7 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9XD9GWR3VJ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = fastjenkins/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.komorian.fastjenkins;
