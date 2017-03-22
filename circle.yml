@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - fastlane test --scheme "fastjenkins" --workspace "fastjenkins-ios.xcworkspace"
+    - fastlane test
