@@ -16,10 +16,22 @@ fastlane_version "2.18.3"
 default_platform :ios
 
 platform :ios do
-  before_all do
+  before_all do |lane|
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    
-    
+    # update_fastlane
+
+    # ensure_git_status_clean
+
+    if lane == :snap
+      next
+    end
+
+    # Increment build number before building
+    increment_build_number(
+      xcodeproj: "fastjenkins/fastjenkins.xcodeproj",
+      build_number: ENV['CIRCLE_BUILD_NUM']
+    )
+
   end
 
   desc "Runs all the tests"
@@ -38,6 +50,15 @@ platform :ios do
     # You can also use other beta testing services here (run `fastlane actions`)
   end
 
+  lane :testing do
+    fabric(scheme: "Testing")
+  end
+
+  lane :staging do |options|
+    options[:scheme] = "Staging"
+    fabric(options)
+  end
+
   desc "Deploy a new version to the App Store"
   lane :release do
     # match(type: "appstore")
@@ -47,7 +68,34 @@ platform :ios do
     # frameit
   end
 
-  # You can define as many lanes as you want
+  ######################### PRIVATE LANES #########################
+  #------------------------- Crashlytics -------------------------#
+
+  private_lane :fabric do |options|
+    scheme = options[:scheme]
+
+    build(
+      scheme: scheme,
+      signId: ENV['SIGNING_IDENTITY_DEV']
+    )
+  end
+
+  private_lane :build do |options|
+    scheme = options[:scheme]
+    signingId = options[:signId]
+
+    gym(
+      scheme: "fastjenkins #{scheme}",
+      configuration: scheme,
+      clean: true,
+      # sdk: "iphonesimulator10.2",
+      include_bitcode: false,
+      workspace: "fastjenkins-ios.xcworkspace",
+      output_directory: "fastlane/build",
+      output_name: "fastjenkins.ipa",
+      codesigning_identity: "#{signingId}",
+    )
+  end
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful
