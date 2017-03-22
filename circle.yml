@@ -2,7 +2,7 @@ machine:
   xcode:
     version: 8.2
 
-test:
+test_orig:
   override:
     - set -o pipefail &&
           xcodebuild
@@ -16,3 +16,9 @@ test:
             clean build test |
           tee $CIRCLE_ARTIFACTS/xcode_raw.log |
           xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
+
+test:
+  just_label:
+    branch: feature/fastjenkins-ios
+      commands:
+        - fastlane test --scheme "fastjenkins" --workspace "fastjenkins-ios.xcworkspace"
