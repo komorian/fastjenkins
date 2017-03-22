@@ -6,9 +6,9 @@ dependencies:
   pre:
     - gem update fastlane
 
-test:
-  override:
-    - fastlane test
+# test:
+#   override:
+#     - fastlane test
 
 deployment:
   testing:
