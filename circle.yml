@@ -1,0 +1,22 @@
+machine:
+  xcode:
+    version: 8.2
+
+dependencies:
+  pre:
+    - gem update fastlane
+
+# test:
+#   override:
+#     - fastlane test
+
+deployment:
+  testing:
+    branch: [develop, /feature\/.*/]
+    commands:
+      - fastlane testing
+
+  staging:
+    branch: master
+    commands:
+      - fastlane staging
