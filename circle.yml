@@ -5,7 +5,7 @@ machine:
 dependecies:
   pre:
     - gem update fastlane
-    
+
 test:
   override:
     - fastlane test
