@@ -21,6 +21,7 @@ platform :ios do
     # update_fastlane
 
     # ensure_git_status_clean
+    setup_jenkins
 
     if lane == :snap
       next
